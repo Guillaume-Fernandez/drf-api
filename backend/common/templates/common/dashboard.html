@@ -1,0 +1,48 @@
+{% extends "common/admin.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li class="active"><a href="{% url 'dashboard' %}">SampleApp</a></li>
+</ul>
+{% endblock %}
+
+{% block format_choices %}
+  <form id="get-form" class="pull-right">
+    <fieldset>
+      <div class="btn-group format-selection">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Format <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {% with 'html api json' as list %}
+                {% for format in list.split %}
+                <li>
+                <a class="format-option"
+                    href='{% add_query_param request "format" format %}'
+                    rel="nofollow">
+                    {{ format }}
+                </a>
+                </li>
+                {% endfor %}
+            {% endwith %}
+        </ul>
+      </div>
+    </fieldset>
+  </form>
+{% endblock %}
+
+{% block custom_content %}
+<h2>Overview</h2>
+Welcome in SampleApp project.
+This is a template project to easily start coding REST API with Django Rest Framework.
+<h2>Features</h2>
+<ul>
+  <li>- Nothing. That's your job.</li>
+</ul>
+
+
+</li>
+
+{% endblock %}

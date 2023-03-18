@@ -1,0 +1,60 @@
+{% extends "common/base_admin.html" %}
+{% load static %}
+
+{# Override this template in your own templates directory to customize #}
+{% block title %}SampleApp{% endblock %}
+{% block branding %}
+    <!-- Sidebar - Brand -->
+    <a class="navbar-brand" href="{% url 'dashboard' %}">
+        <img src="" alt="SampleApp" width="90" height="40">
+    </a>
+
+    {% block left-navbar %}
+        <ul class="app-menu">
+            <li><a href="{% url 'task-list' %}">Tasks</a></li>
+        </ul>   
+    {% endblock %}
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .app-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            /* overflow: hidden;
+            background-color: #333333; */
+        }
+        
+        .app-menu li {
+        float: left;
+        }
+        
+        .app-menu li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 16px;
+        text-decoration: none;
+        /* font-weight: bold; */
+        }
+        
+        .app-menu li a:hover {
+        background-color: #094372;
+        }
+    </style>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+
+    {% if error_form %}
+    <script>
+        $(function() {
+            $('#errorModal').modal({show: true});
+        });
+    </script>
+    {% endif %}
+{% endblock %}
+
