@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from common.views import CommonBaseViewSet
 
-# Create your views here.
+from .models import Task
+from .serializers import TaskSerializer
+
+class TaskViewSet(CommonBaseViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
