@@ -4,24 +4,24 @@ from rest_framework.pagination import PageNumberPagination
 from .renderers import CommonRenderer
 from .permissions import CommonUserPermission
 
-class LabsResultsSetPagination(PageNumberPagination):
+class CommonResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 1000
 
-class LabsBaseViewSet(CommonUserPermission, viewsets.ModelViewSet):
+class CommonBaseViewSet(viewsets.ModelViewSet):
     renderer_classes = [CommonRenderer, renderers.BrowsableAPIRenderer, renderers.JSONRenderer]
-    pagination_class = LabsResultsSetPagination
-    # permission_classes = [LabsUserPermission]
+    pagination_class = CommonResultsSetPagination
+    # permission_classes = [CommonUserPermission]
     # authentication_classes = [authentication.SessionAuthentication]
 
 
-class DashboardAPIView(CommonUserPermission, views.APIView):
+class DashboardAPIView(views.APIView):
     name = 'SampleApp'
     renderer_classes = [renderers.TemplateHTMLRenderer, renderers.BrowsableAPIRenderer, renderers.JSONRenderer]
     template_name = 'common/dashboard.html'
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    # authentication_classes = [authentication.SessionAuthentication]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, format=None):
         """
@@ -31,6 +31,6 @@ class DashboardAPIView(CommonUserPermission, views.APIView):
         """
 
         return response.Response({
-            'hi': 'Welcome at my-website.com.',
+            'hi': 'Welcome at SampleApp.com.',
             'varA': 'You may want to print global information there',
         })
