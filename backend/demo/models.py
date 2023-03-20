@@ -1,7 +1,9 @@
 from django.db import models
 from django.dispatch import receiver
 
-# Create your models here.
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Task(models.Model):
     name = models.CharField(max_length=20)
@@ -17,6 +19,7 @@ def remember_name(sender, instance, **kwargs):
 
 @receiver(models.signals.pre_save, sender=Task)
 def before_saving(sender, instance, **kwargs):
+    logger.info("I'm doing some important stuff before saving Task Instance.")
     pass
 
 @receiver(models.signals.post_save, sender=Task)
