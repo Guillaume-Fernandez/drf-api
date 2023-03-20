@@ -12,16 +12,16 @@ class CommonResultsSetPagination(PageNumberPagination):
 class CommonBaseViewSet(viewsets.ModelViewSet):
     renderer_classes = [CommonRenderer, renderers.BrowsableAPIRenderer, renderers.JSONRenderer]
     pagination_class = CommonResultsSetPagination
-    # permission_classes = [CommonUserPermission]
-    # authentication_classes = [authentication.SessionAuthentication]
-
 
 class DashboardAPIView(views.APIView):
     name = 'SampleApp'
     renderer_classes = [renderers.TemplateHTMLRenderer, renderers.BrowsableAPIRenderer, renderers.JSONRenderer]
     template_name = 'common/dashboard.html'
+    # By default, views accesses need Session authentication, do not accept un-authenticated requests and require the user to be in a group
+    # (cf settings.py REST_FRAMEWORK)
+    # You may want to change this for some specific views. For example:
     # authentication_classes = [authentication.SessionAuthentication]
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, format=None):
         """
