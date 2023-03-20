@@ -19,6 +19,12 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+Create .env from .env.dist and edit it:
+```
+cp .env.dist .env
+vim .env
+```
+
 Migrate and create superuser:
 ```bash
 python manage.py migrate
