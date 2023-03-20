@@ -3,6 +3,14 @@ A template to easily start coding simple REST APIs
 
 ## Quick start
 
+Configure PostgreSQL:
+```sql
+create database backend;
+create USER backend;
+alter USER backend with ENCRYPTED PASSWORD 'backend';
+alter database backend owner to backend ;
+```
+
 Create virtual environment:
 ```bash
 cd backend/
