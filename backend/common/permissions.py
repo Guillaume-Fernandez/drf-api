@@ -1,11 +1,17 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.db import connection
 
 def create_groups():
     """
         Create all groups needed. Is called at startup by AppConfig.ready
     """
-    Group.objects.get_or_create(name='common_users')
+    all_tables = connection.introspection.table_names()
+    if 'auth_group' in all_tables:
+        """
+        Without this condition, you cannot generate completely new database (relation "auth_group" does not exist)
+        """
+        Group.objects.get_or_create(name='common_users')
 
 # LoginRequiredMixin is used to authenticate users and redirect them to the login page if need.
 # IMPORTANT: LoginRequiredMixin should be at the leftmost position in the inheritance list.
